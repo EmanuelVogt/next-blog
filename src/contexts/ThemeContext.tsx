@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { Box, ThemeProvider } from '@mui/material'
 
@@ -9,7 +10,6 @@ type ThemeContextData = {
   toggleTheme: () => void
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 const ThemeContext = createContext({} as ThemeContextData)
 
 type Props = {

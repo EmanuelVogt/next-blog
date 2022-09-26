@@ -1,4 +1,5 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
+import { withSSRGuest } from '../utils/withSSRGuest'
 
 const Home: NextPage = () => {
   return (
@@ -7,3 +8,9 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})
