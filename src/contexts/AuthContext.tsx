@@ -74,11 +74,11 @@ export function AuthProvider({ children }: Props) {
     }
   }, [pathname]);
 
-  const logout = useCallback(() => {
+  const logout = () => {
     destroyCookie(undefined, "@next-token");
     setUser(undefined)
     push('/')
-  }, [])
+  }
 
   useEffect(() => {
     silentLogin();

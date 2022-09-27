@@ -64,8 +64,8 @@ const menuItems = [
     icon: <HomeOutlinedIcon />,
   },
   {
-    title: 'Inbox',
-    to: '/admin/inbox',
+    title: 'Posts',
+    to: '/admin/posts',
     icon: <InboxIcon />,
   },
   {
