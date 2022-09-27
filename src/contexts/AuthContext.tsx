@@ -71,10 +71,7 @@ export function AuthProvider({ children }: Props) {
         }
       }
     }
-    if(pathname !== "/"){
-      push("/login");
-    }
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     silentLogin();
