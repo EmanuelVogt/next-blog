@@ -1,6 +1,6 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import CardPost from "../CardPost";
+import CardPost from "./CardPost";
 
 const posts = [
   {
