@@ -1,6 +1,5 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -8,7 +7,7 @@ import { CardActionArea } from "@mui/material";
 import { useRouter } from "next/router";
 
 type Post = {
-  id: number
+  id: number;
   title: string;
   thumb: string;
   description: string;
@@ -27,7 +26,9 @@ export default function CardPost({ post }: Props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={() => handleNavigate(post.id)}>
-        <CardHeader title={post.title} subheader={post.date} />
+        <Typography  overflow="hidden" textOverflow="ellipsis">
+          {post.title}
+        </Typography>
         <CardMedia
           component="img"
           height="194"

@@ -25,6 +25,7 @@ type User = {
 
 type AuthContextData = {
   login(data: LoginData): Promise<void>;
+  logout(): void
   isAuth: boolean;
   user: User | undefined;
 };
@@ -50,7 +51,7 @@ export function AuthProvider({ children }: Props) {
       });
       setUser(data.account);
       api.defaults.headers.common["x-access-token"] = data.account.accessToken;
-      push("/admin");
+      push("/admin/home");
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error.response?.data);
@@ -73,12 +74,18 @@ export function AuthProvider({ children }: Props) {
     }
   }, [pathname]);
 
+  const logout = useCallback(() => {
+    destroyCookie(undefined, "@next-token");
+    setUser(undefined)
+    push('/')
+  }, [])
+
   useEffect(() => {
     silentLogin();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ login, isAuth, user }}>
+    <AuthContext.Provider value={{ login, isAuth, user, logout }}>
       {children}
     </AuthContext.Provider>
   );
