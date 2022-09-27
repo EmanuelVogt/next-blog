@@ -22,7 +22,6 @@ import {
   useTheme,
 } from '@mui/material'
 import MuiAlert from '@mui/material/Alert'
-import axios from 'axios'
 
 import LottieLogin from '../../assets/lottie-login.json'
 import { Input } from '../../components/shared/form/Input'
