@@ -25,7 +25,7 @@ type User = {
 
 type AuthContextData = {
   login(data: LoginData): Promise<void>;
-  logout(): void
+  logout(): void;
   isAuth: boolean;
   user: User | undefined;
 };
@@ -39,7 +39,7 @@ type Props = {
 export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<User>();
   const isAuth = !!user;
-  const { push, pathname } = useRouter();
+  const { push } = useRouter();
 
   const login = useCallback(async ({ email, password }: LoginData) => {
     destroyCookie(undefined, "@next-token");
@@ -72,13 +72,17 @@ export function AuthProvider({ children }: Props) {
         }
       }
     }
-  }, [pathname]);
+  }, []);
 
-  const logout = () => {
-    destroyCookie(undefined, "@next-token");
-    setUser(undefined)
-    push('/')
-  }
+  const logout = useCallback(() => {
+    destroyCookie(undefined, "@next-token", {
+      path: '/'
+    });
+    setUser(undefined);
+    const { "@next-token": token } = parseCookies();
+    console.log(token)
+    push("/");
+  }, []);
 
   useEffect(() => {
     silentLogin();
