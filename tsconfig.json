@@ -18,13 +18,13 @@
     "paths": {
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
-      "@backend/*": ["backend/*"],
       "@contexts/*": ["contexts/*"],
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@themes/*": ["themes/*"],
       "@assets/*": ["assets/*"],
-      "@presentation/*": ["backend/presentation/*"]
+      "@presentation/*": ["backend/presentation/*"],
+      "@domain/*": ["backend/domain/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
