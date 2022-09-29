@@ -1,3 +1,5 @@
+import { badRequest } from '@presentation/helpers/http'
+import { MissingParamError } from '@presentation/errors'
 import { test, describe, expect, vi} from 'vitest'
 import { SignUpController } from '.'
 import { AccountModel, HttpRequest, Validation } from './protocols'
@@ -13,7 +15,8 @@ const makeFakeAccount = (): AccountModel => ({
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
     validate (input: any): Error {
-      return new Error()
+      //@ts-ignore
+      return null
     }
   }
   return new ValidationStub()
@@ -41,5 +44,12 @@ describe('signup controller', () => {
     const validateSpy = vi.spyOn(validationStub, 'validate')
     await sut.handle(httpRequest)
     expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
+
+  test('should return 400 if valididation return an error', async () => {
+    const { sut, validationStub, httpRequest } = makeSut()
+    vi.spyOn(validationStub, 'validate').mockReturnValue(new MissingParamError('any_field'))
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 })
