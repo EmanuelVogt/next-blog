@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <filter id="Elipse_314" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#6c79a7" flood-opacity="0.361"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_11825" data-name="Grupo 11825" transform="translate(-875 -348.5)">
+    <g transform="matrix(1, 0, 0, 1, 875, 348.5)" filter="url(#Elipse_314)">
+      <g id="Elipse_314-2" data-name="Elipse 314" transform="translate(12 10)" fill="#a48ee2" stroke="#c5b5ff" stroke-width="2">
+        <circle cx="20" cy="20" r="20" stroke="none"/>
+        <circle cx="20" cy="20" r="19" fill="none"/>
+      </g>
+    </g>
+    <g id="Grupo_11848" data-name="Grupo 11848" transform="translate(1)">
+      <rect id="Retângulo_90341" data-name="Retângulo 90341" width="16" height="16" transform="translate(898 370.5)" fill="#ff00e2" opacity="0.001"/>
+      <path id="Icon_material-edit" data-name="Icon material-edit" d="M4.5,17.163V20.5H7.833l9.83-9.83L14.33,7.334ZM20.24,8.089a.885.885,0,0,0,0-1.253l-2.08-2.08a.885.885,0,0,0-1.253,0L15.281,6.383l3.333,3.333L20.24,8.089Z" transform="translate(893.5 366.004)" fill="#f7f9ff"/>
+    </g>
+  </g>
+</svg>
