@@ -23,7 +23,8 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@themes/*": ["themes/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@presentation/*": ["backend/presentation/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
