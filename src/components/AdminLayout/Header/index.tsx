@@ -7,7 +7,7 @@ import { deepOrange } from '@mui/material/colors'
 
 import { MenuAvatar } from '../MenuAvatar'
 
-import { EmptyDiv, Image } from './styles'
+import { EmptyDiv } from './styles'
 
 type Props = {
   handleCollapseSideBar: () => void

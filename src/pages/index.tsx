@@ -1,10 +1,9 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { ReactElement } from "react";
-import HomeLayout from "../components/HomeLayout";
-import Posts from "../components/Posts";
+import HomeLayout from "@components/HomeLayout";
+import Posts from "@components/Posts";
 
-import { withSSRGuest } from "../utils/withSSRGuest";
-import { NextPageWithLayout } from "./_app";
+import { withSSRGuest } from "@utils/withSSRGuest";
 
 const Home: NextPage = () => {
   return (

@@ -10,7 +10,7 @@ import {
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { AuthContext } from "@contexts/AuthContext";
 
 type Props = {
   anchorEl: null | HTMLElement;

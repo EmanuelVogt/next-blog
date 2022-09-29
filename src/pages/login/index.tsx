@@ -24,8 +24,8 @@ import {
 import MuiAlert from '@mui/material/Alert'
 
 import LottieLogin from '../../assets/lottie-login.json'
-import { Input } from '../../components/shared/form/Input'
-import { AuthContext } from '../../contexts/AuthContext'
+import { Input } from '@components/shared/form/Input'
+import { AuthContext } from '@contexts/AuthContext'
 
 interface IFormInput {
   email: string

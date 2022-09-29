@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
-import { AdminLayout } from '../../../components/AdminLayout'
-import { withSSRAuth } from '../../../utils/withSSRAuth'
+import { AdminLayout } from '@components/AdminLayout'
+import { withSSRAuth } from '@utils/withSSRAuth'
 
 const Home: NextPage = () => {
 

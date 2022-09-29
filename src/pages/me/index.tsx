@@ -1,9 +1,8 @@
-import { Container, Paper } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { ReactElement } from "react";
-import HomeLayout from "../../components/HomeLayout";
-import ProfileHome from "../../components/ProfileHome";
-import { withSSRGuest } from "../../utils/withSSRGuest";
+import HomeLayout from "@components/HomeLayout";
+import ProfileHome from "@components/ProfileHome";
+import { withSSRGuest } from "@utils/withSSRGuest";
 
 const Me: NextPage = () => {
   return (

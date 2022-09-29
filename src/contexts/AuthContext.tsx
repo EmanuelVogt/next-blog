@@ -9,7 +9,7 @@ import {
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
-import { api } from "../services/api";
+import { api } from "@services/api";
 
 type LoginData = {
   email: string;
