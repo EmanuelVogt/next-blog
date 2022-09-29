@@ -1,6 +1,6 @@
-import { test, describe, expect } from 'vitest'
+import { test, describe, expect, vi} from 'vitest'
 import { SignUpController } from '.'
-import { AccountModel, HttpRequest } from './protocols'
+import { AccountModel, HttpRequest, Validation } from './protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -10,24 +10,36 @@ const makeFakeAccount = (): AccountModel => ({
   accessToken: 'any_token'
 })
 
+const makeValidation = (): Validation => {
+  class ValidationStub implements Validation {
+    validate (input: any): Error {
+      return new Error()
+    }
+  }
+  return new ValidationStub()
+}
+
 type SutTypes = {
   sut: SignUpController
   httpRequest: HttpRequest
+  validationStub: Validation
 }
 const makeSut = (): SutTypes => {
-  const sut = new SignUpController()
-  const httpRequest: HttpRequest = { body: makeFakeAccount() }
-
+  const validationStub = makeValidation()
+  const sut = new SignUpController(validationStub)
+  const httpRequest = { body: makeFakeAccount() }
   return {
     sut,
-    httpRequest
+    httpRequest,
+    validationStub
   }
 }
-describe('signup controller', () => {
-  test('returns correctly values of sut', async () => {
-    const { sut, httpRequest } = makeSut()
-    const httpResponse = await sut.handle(httpRequest)
 
-    expect(httpResponse).toEqual({ body: '', statusCode: 400 })
+describe('signup controller', () => {
+  test('should call Validation with correct values', async () => {
+    const { sut, validationStub, httpRequest } = makeSut()
+    const validateSpy = vi.spyOn(validationStub, 'validate')
+    await sut.handle(httpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 })
