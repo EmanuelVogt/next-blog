@@ -1,4 +1,4 @@
-import { badRequest, forbidden, serverError } from '@presentation/helpers/http'
+import { badRequest, forbidden, ok, serverError } from '@presentation/helpers/http'
 import { ForbidenError, MissingParamError } from '@presentation/errors'
 import { test, describe, expect, vi } from 'vitest'
 import { SignUpController } from '.'
@@ -135,5 +135,11 @@ describe('signup controller', () => {
     })
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('should return 200 if valid data is provided', async () => {
+    const { sut, httpRequest } = makeSut()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(ok(makeFakeAccount()))
   })
 })
