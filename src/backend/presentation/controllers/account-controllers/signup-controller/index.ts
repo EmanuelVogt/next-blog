@@ -1,5 +1,5 @@
 import { ForbidenError, ServerError } from "@presentation/errors";
-import { badRequest, forbidden, serverError } from "@presentation/helpers/http";
+import { badRequest, forbidden, ok, serverError } from "@presentation/helpers/http";
 import { AddAccount, Authentication, Controller, HttpRequest, HttpResponse, Validation } from "./protocols";
 
 export class SignUpController implements Controller {
@@ -20,7 +20,8 @@ export class SignUpController implements Controller {
         return forbidden(new ForbidenError())
       }
       const { accessToken } = await this.authentication.auth({ email, password })
-      return new Promise(resolve => resolve({ body: '', statusCode: 400 }))
+      const dataToSend = { ...account, accessToken }
+      return ok(dataToSend)
     } catch (error) {
       if (error instanceof Error) {
         return serverError(error)
