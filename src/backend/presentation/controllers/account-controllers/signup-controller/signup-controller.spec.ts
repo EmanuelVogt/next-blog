@@ -1,5 +1,5 @@
-import { badRequest, serverError } from '@presentation/helpers/http'
-import { MissingParamError } from '@presentation/errors'
+import { badRequest, forbidden, serverError } from '@presentation/helpers/http'
+import { ForbidenError, MissingParamError } from '@presentation/errors'
 import { test, describe, expect, vi } from 'vitest'
 import { SignUpController } from '.'
 import { AccountModel, AddAccount, AddAccountModel, HttpRequest, UserModel, Validation } from './protocols'
@@ -91,5 +91,13 @@ describe('signup controller', () => {
     })
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('should return 403 if AddAccount returns null', async () => {
+    const { sut, addAccountStub, httpRequest } = makeSut()
+    vi.spyOn(addAccountStub, 'create').mockReturnValueOnce(
+      new Promise(resolve => resolve(null!)))
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new ForbidenError()))
   })
 })
