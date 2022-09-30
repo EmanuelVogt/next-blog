@@ -1,6 +1,5 @@
-import { ServerError } from "@presentation/errors";
-import { badRequest, serverError } from "@presentation/helpers/http";
-import { i } from "vitest/dist/index-6e18a03a";
+import { ForbidenError, ServerError } from "@presentation/errors";
+import { badRequest, forbidden, serverError } from "@presentation/helpers/http";
 import { AddAccount, Controller, HttpRequest, HttpResponse, Validation } from "./protocols";
 
 export class SignUpController implements Controller {
@@ -16,7 +15,9 @@ export class SignUpController implements Controller {
       }
       const { name, email, password } = httpRequest.body
       const account = await this.addAccount.create({ email, name, password })
-
+      if (!account) {
+        return forbidden(new ForbidenError())
+      }
       return new Promise(resolve => resolve({ body: '', statusCode: 400 }))
     } catch (error) {
       if(error instanceof Error) {
