@@ -1,11 +1,12 @@
 import { ForbidenError, ServerError } from "@presentation/errors";
 import { badRequest, forbidden, serverError } from "@presentation/helpers/http";
-import { AddAccount, Controller, HttpRequest, HttpResponse, Validation } from "./protocols";
+import { AddAccount, Authentication, Controller, HttpRequest, HttpResponse, Validation } from "./protocols";
 
 export class SignUpController implements Controller {
   constructor(
     private readonly validation: Validation,
     private readonly addAccount: AddAccount,
+    private readonly authentication: Authentication
   ) { }
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
@@ -18,9 +19,10 @@ export class SignUpController implements Controller {
       if (!account) {
         return forbidden(new ForbidenError())
       }
+      const { accessToken } = await this.authentication.auth({ email, password })
       return new Promise(resolve => resolve({ body: '', statusCode: 400 }))
     } catch (error) {
-      if(error instanceof Error) {
+      if (error instanceof Error) {
         return serverError(error)
       }
       return serverError(new ServerError('An error occoured in server side, contact the server suport'))
