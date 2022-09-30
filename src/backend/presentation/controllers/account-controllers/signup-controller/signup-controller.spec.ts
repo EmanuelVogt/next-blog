@@ -2,7 +2,7 @@ import { badRequest, forbidden, serverError } from '@presentation/helpers/http'
 import { ForbidenError, MissingParamError } from '@presentation/errors'
 import { test, describe, expect, vi } from 'vitest'
 import { SignUpController } from '.'
-import { AccountModel, AddAccount, AddAccountModel, HttpRequest, UserModel, Validation } from './protocols'
+import { AccountModel, AddAccount, AddAccountModel, AuthenticatedAccountModel, Authentication, AuthenticationModel, HttpRequest, UserModel, Validation } from './protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -18,12 +18,28 @@ const makeFakeUser = (): UserModel => ({
   id: 'any_id',
 })
 
+const makeAuthentication = (): Authentication => {
+  class AuthenticationStub implements Authentication {
+    async auth({ email, password }: AuthenticationModel): Promise<AuthenticatedAccountModel> {
+      return await new Promise(resolve => resolve({
+        id: 'any_id',
+        name: 'any_name',
+        email: 'any_email',
+        role: 'any_role',
+        accessToken: 'any_token'
+      }))
+    }
+  }
+
+  return new AuthenticationStub()
+}
+
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async create(account: AddAccountModel): Promise<UserModel> {
       return new Promise(resolve => resolve(makeFakeUser()))
     }
-  
+
   }
   return new AddAccountStub()
 }
@@ -43,17 +59,20 @@ type SutTypes = {
   httpRequest: HttpRequest
   validationStub: Validation
   addAccountStub: AddAccount
+  authenticationStub: Authentication
 }
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
   const addAccountStub = makeAddAccount()
-  const sut = new SignUpController(validationStub, addAccountStub)
+  const authenticationStub = makeAuthentication()
+  const sut = new SignUpController(validationStub, addAccountStub, authenticationStub)
   const httpRequest = { body: makeFakeAccount() }
   return {
     sut,
     httpRequest,
     validationStub,
-    addAccountStub
+    addAccountStub,
+    authenticationStub
   }
 }
 
@@ -87,7 +106,7 @@ describe('signup controller', () => {
     const { sut, addAccountStub, httpRequest } = makeSut()
     //@ts-ignore
     vi.spyOn(addAccountStub, 'create').mockImplementationOnce(async () => {
-      return await new Promise((_, reject) => reject( new Error()))
+      return await new Promise((_, reject) => reject(new Error()))
     })
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
@@ -99,5 +118,22 @@ describe('signup controller', () => {
       new Promise(resolve => resolve(null!)))
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(forbidden(new ForbidenError()))
+  })
+
+  test('should call Authentication with correct values', async () => {
+    const { sut, httpRequest, authenticationStub } = makeSut()
+    const authSpy = vi.spyOn(authenticationStub, 'auth')
+    await sut.handle(httpRequest)
+    expect(authSpy).toHaveBeenCalledWith({ email: 'valid@email.com', password: 'valid_password' })
+  })
+
+  test('should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub, httpRequest } = makeSut()
+    //@ts-ignore
+    vi.spyOn(authenticationStub, 'auth').mockImplementationOnce(async () => {
+      return await new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
