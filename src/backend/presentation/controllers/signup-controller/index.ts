@@ -23,7 +23,6 @@ export class SignUpController implements Controller {
       const dataToSend = { ...account, accessToken }
       return ok(dataToSend)
     } catch (error) {
-      console.log(error)
       if (error instanceof Error) {
         return serverError(error)
       }
