@@ -1,8 +1,18 @@
 import { badRequest, forbidden, ok, serverError } from '@presentation/helpers/http'
 import { ForbidenError, MissingParamError } from '@presentation/errors'
 import { test, describe, expect, vi } from 'vitest'
-import { SignUpController } from '.'
-import { AccountModel, AddAccount, AddAccountModel, AuthenticatedAccountModel, Authentication, AuthenticationModel, HttpRequest, UserModel, Validation } from './protocols'
+import { SignUpController } from '@presentation/controllers/signup-controller'
+import {
+  AccountModel,
+  AddAccount,
+  AddAccountModel,
+  AuthenticatedAccountModel,
+  Authentication,
+  AuthenticationModel,
+  HttpRequest,
+  UserModel,
+  Validation
+} from '@presentation/controllers/signup-controller/protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -25,7 +35,6 @@ const makeAuthentication = (): Authentication => {
         id: 'any_id',
         name: 'any_name',
         email: "any_email@mail.com",
-        role: 'any_role',
         accessToken: 'any_token'
       }))
     }
@@ -141,9 +150,9 @@ describe('signup controller', () => {
     const { sut, httpRequest } = makeSut()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok({
-        accessToken: "any_token",
-        email: "any_email@mail.com",
-        id: "any_id",
+      accessToken: "any_token",
+      email: "any_email@mail.com",
+      id: "any_id",
     }))
   })
 })
