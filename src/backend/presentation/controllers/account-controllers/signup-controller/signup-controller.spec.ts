@@ -24,7 +24,7 @@ const makeAuthentication = (): Authentication => {
       return await new Promise(resolve => resolve({
         id: 'any_id',
         name: 'any_name',
-        email: 'any_email',
+        email: "any_email@mail.com",
         role: 'any_role',
         accessToken: 'any_token'
       }))
@@ -140,6 +140,10 @@ describe('signup controller', () => {
   test('should return 200 if valid data is provided', async () => {
     const { sut, httpRequest } = makeSut()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok(makeFakeAccount()))
+    expect(httpResponse).toEqual(ok({
+        accessToken: "any_token",
+        email: "any_email@mail.com",
+        id: "any_id",
+    }))
   })
 })

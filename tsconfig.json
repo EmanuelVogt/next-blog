@@ -24,7 +24,11 @@
       "@themes/*": ["themes/*"],
       "@assets/*": ["assets/*"],
       "@presentation/*": ["backend/presentation/*"],
-      "@domain/*": ["backend/domain/*"]
+      "@domain/*": ["backend/domain/*"],
+      "@data/*": ["backend/data/*"],
+      "@validation/*": ["backend/validation/*"],
+      "@infra/*": ["backend/infra/*"],
+      "@main/*": ["backend/main/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

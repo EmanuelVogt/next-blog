@@ -11,6 +11,7 @@ export const NewPost = (): JSX.Element => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
+  console.log(value)
   return (
     <Box
       sx={{
