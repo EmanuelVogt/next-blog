@@ -83,14 +83,14 @@ const makeSut = (): SutTypes => {
 describe('DbAddAccount', () => {
   test('should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
-    const loadSpy = vi.spyOn(loadAccountByEmailRepositoryStub, 'loadAccountByEmail')
+    const loadSpy = vi.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
     await sut.create(makeFakeAccount())
     void expect(loadSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
   test('should return null if LoadAccountByEmailRepository not return null', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
-    const loadSpy = vi.spyOn(loadAccountByEmailRepositoryStub, 'loadAccountByEmail')
+    const loadSpy = vi.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
       .mockReturnValueOnce(new Promise(resolve => resolve(makeFakeAccount())))
     const sutResponse = await sut.create(makeFakeAccount())
     expect(loadSpy).not.toBe(null)
