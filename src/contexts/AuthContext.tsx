@@ -44,7 +44,7 @@ export function AuthProvider({ children }: Props) {
   const login = useCallback(async ({ email, password }: LoginData) => {
     destroyCookie(undefined, "@next-token");
     try {
-      const { data } = await api.post("/login", { email, password });
+      const { data } = await api.post("/api/account/login", { email, password });
       setCookie(undefined, "@next-token", data.account.accessToken, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: "/", //all app can see

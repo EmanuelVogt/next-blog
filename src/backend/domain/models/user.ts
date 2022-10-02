@@ -1,5 +1,5 @@
 export interface UserModel {
   id: string
   email: string
-  accessToken: string
+  accessToken: string | null
 }

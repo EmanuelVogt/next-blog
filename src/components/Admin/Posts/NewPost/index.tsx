@@ -1,17 +1,21 @@
 /* eslint-disable react/display-name */
+import { AuthContext } from "@contexts/AuthContext";
 import { Box, TextField, Button } from "@mui/material";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Editor } from "../Editor";
 import { ThumbUpload } from "../ThumbUpload";
 
 export const NewPost = (): JSX.Element => {
+  const { user } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  console.log(value)
+  useEffect(() => {
+    console.log(user)
+  }, [])
   return (
     <Box
       sx={{
