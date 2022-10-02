@@ -21,5 +21,6 @@ export const alias: Record<string, string> = {
   '@presentation/controllers/signup-controller': r('./src/backend/presentation/controllers/signup-controller'),
   '@main/factories/controllers/signup-controller-factory': r('./src/backend/main/factories/controllers/signup-controller-factory'),
   '@presentation/controllers/login-controller/protocols': r('./src/backend/presentation/controllers/login-controller/protocols'),
-  '@presentation/controllers/login-controller': r('./src/backend/presentation/controllers/login-controller')
+  '@presentation/controllers/login-controller': r('./src/backend/presentation/controllers/login-controller'),
+  '@data/use-cases/authentication/protocols': r('./src/backend/data/use-cases/authentication/protocols'),
 }
