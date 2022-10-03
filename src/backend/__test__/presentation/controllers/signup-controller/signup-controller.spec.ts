@@ -1,7 +1,7 @@
-import { badRequest, forbidden, ok, serverError } from '@presentation/helpers/http'
-import { ForbidenError, MissingParamError } from '@presentation/errors'
+import { badRequest, forbidden, ok, serverError } from '@/backend/presentation/helpers/http'
+import { ForbidenError, MissingParamError } from '@/backend/presentation/errors'
 import { test, describe, expect, vi } from 'vitest'
-import { SignUpController } from '@presentation/controllers/signup-controller'
+import { SignUpController } from '@/backend/presentation/controllers/signup-controller'
 import {
   AccountModel,
   AddAccount,
@@ -12,7 +12,7 @@ import {
   HttpRequest,
   UserModel,
   Validation
-} from '@presentation/controllers/signup-controller/protocols'
+} from '@/backend/presentation/controllers/signup-controller/protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',

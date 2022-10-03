@@ -1,8 +1,8 @@
-import { AccessDenied } from '@presentation/errors'
-import { forbidden, ok } from '@presentation/helpers/http'
+import { AccessDenied } from '@/backend/presentation/errors'
+import { forbidden, ok } from '@/backend/presentation/helpers/http'
 
-import { AuthMiddleware } from '@presentation/middlewares/auth-middleware'
-import { LoadAccountByToken, HttpRequest, AccountModel } from '@presentation/middlewares/protocols'
+import { AuthMiddleware } from '@/backend/presentation/middlewares/auth-middleware'
+import { LoadAccountByToken, HttpRequest, AccountModel } from '@/backend/presentation/middlewares/protocols'
 import {describe, test, expect, vi } from 'vitest'
 
 type SutTypes = {

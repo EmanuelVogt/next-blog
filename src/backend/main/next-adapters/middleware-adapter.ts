@@ -1,6 +1,6 @@
-import { HttpRequest, Middleware } from '@presentation/protocols'
+import { HttpRequest, Middleware } from '@/backend/presentation/protocols'
 import { NextHandler } from "next-connect"
-import { NextApiRequestAssign } from '@main/config/next-request-assign';
+import { NextApiRequestAssign } from '@/backend/main/config/next-request-assign';
 import { NextApiResponse } from 'next';
 
 export const nextAdapterMiddleware = (middleware: Middleware) => {

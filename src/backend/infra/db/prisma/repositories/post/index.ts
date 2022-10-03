@@ -1,5 +1,5 @@
-import { AddPostRepository } from "@data/protocols/db/add-post-repository";
-import { AddPostModel } from "@domain/use-cases/add-post";
+import { AddPostRepository } from "@/backend/data/protocols/db/add-post-repository";
+import { AddPostModel } from "@/backend/domain/use-cases/add-post";
 import { PrismaClient } from "@prisma/client";
 
 export class PostPrismaRepository implements AddPostRepository {

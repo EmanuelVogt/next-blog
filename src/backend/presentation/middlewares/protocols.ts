@@ -1,3 +1,3 @@
 export * from '../protocols'
-export * from '@domain/use-cases/load-account-by-id'
-export * from '@domain/models/account'
+export * from '@/backend/domain/use-cases/load-account-by-token'
+export * from '@/backend/domain/models/account'

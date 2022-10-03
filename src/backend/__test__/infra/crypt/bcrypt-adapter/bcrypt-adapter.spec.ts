@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { BcryptAdapter } from '@infra/crypt/bcrypt-adapter/bcrypt-adapter'
+import { BcryptAdapter } from '@/backend/infra/crypt/bcrypt-adapter/bcrypt-adapter'
 import { describe, test, expect, vi } from 'vitest'
 
 type SutTypes = {

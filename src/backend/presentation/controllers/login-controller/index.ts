@@ -1,5 +1,5 @@
-import { ServerError } from '@presentation/errors'
-import { unautorized, ok, serverError, badRequest } from '@presentation/helpers/http'
+import { ServerError } from '@/backend/presentation/errors'
+import { unautorized, ok, serverError, badRequest } from '@/backend/presentation/helpers/http'
 import { Authentication, Controller, HttpRequest, HttpResponse, Validation } from './protocols'
 
 export class LoginController implements Controller {

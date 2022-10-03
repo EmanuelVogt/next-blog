@@ -3,7 +3,7 @@ import fs from 'fs'
 import AWS from 'aws-sdk'
 
 class s3Service {
-  async uploadFile(fileName, filePath, fileMimetype, s3Path) {
+  async uploadFile(fileName: any, filePath: any, fileMimetype: any, s3Path: any) {
     const s3 = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -18,7 +18,7 @@ class s3Service {
       ContentType: fileMimetype
     }
 
-    await s3.upload(params).promise()
+    await s3.upload(params as any).promise()
     return `${process.env.FILE_PRE_LINK}${s3Path}/${fileName}`
   }
 }

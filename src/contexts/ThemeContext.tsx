@@ -2,8 +2,8 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { Box, ThemeProvider } from '@mui/material'
 
-import { DarkTheme } from '@themes/dark'
-import { LightTheme } from '@themes/light'
+import { DarkTheme } from '@/themes/dark'
+import { LightTheme } from '@/themes/light'
 
 type ThemeContextData = {
   theme: 'light' | 'dark'

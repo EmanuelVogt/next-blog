@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { DbAddAccount } from "@data/use-cases/add-account";
+import { DbAddAccount } from "@/backend/data/use-cases/add-account";
 import {
   AccountModel,
   AddAccountModel,
@@ -7,7 +7,7 @@ import {
   Hasher,
   LoadAccountByEmailRepository,
   UserModel
-} from "@data/use-cases/add-account/protocols";
+} from "@/backend/data/use-cases/add-account/protocols";
 
 interface AccountData {
   name: string

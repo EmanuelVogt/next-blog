@@ -1,9 +1,9 @@
-import { AccountModel } from "@domain/models/account";
-import { AddPostController } from "@presentation/controllers/add-post";
-import { AddPost, AddPostModel, LoadAccountByToken } from "@presentation/controllers/add-post/protocols";
-import { ForbidenError, MissingParamError } from "@presentation/errors";
-import { badRequest, forbidden, noContent, serverError } from "@presentation/helpers/http";
-import { HttpRequest, Validation } from "@presentation/protocols";
+import { AccountModel } from "@/backend/domain/models/account";
+import { AddPostController } from "@/backend/presentation/controllers/add-post";
+import { AddPost, AddPostModel, LoadAccountByToken } from "@/backend/presentation/controllers/add-post/protocols";
+import { ForbidenError, MissingParamError } from "@/backend/presentation/errors";
+import { badRequest, forbidden, noContent, serverError } from "@/backend/presentation/helpers/http";
+import { HttpRequest, Validation } from "@/backend/presentation/protocols";
 import { describe, expect, test, vi } from "vitest";
 
 const makeFakePost = (): AddPostModel => ({

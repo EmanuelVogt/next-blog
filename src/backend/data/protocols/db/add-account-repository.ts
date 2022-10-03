@@ -1,5 +1,5 @@
-import { UserModel } from '@domain/models/user'
-import { AddAccountModel } from '@domain/use-cases/add-account'
+import { UserModel } from '@/backend/domain/models/user'
+import { AddAccountModel } from '@/backend/domain/use-cases/add-account'
 
 export interface AddAccountRepository {
   create: (values: AddAccountModel) => Promise<UserModel>
