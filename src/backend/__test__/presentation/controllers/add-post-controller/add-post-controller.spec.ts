@@ -2,7 +2,7 @@ import { PostModel } from "@domain/models/post";
 import { AddPostController } from "@presentation/controllers/add-post";
 import { AddPost } from "@presentation/controllers/add-post/protocols";
 import { MissingParamError } from "@presentation/errors";
-import { badRequest } from "@presentation/helpers/http";
+import { badRequest, serverError } from "@presentation/helpers/http";
 import { HttpRequest, Validation } from "@presentation/protocols";
 import { describe, expect, test, vi } from "vitest";
 
@@ -73,5 +73,15 @@ describe('AddPostController', () => {
     const spy = vi.spyOn(addPostStub, 'add')
     await sut.handle(httpRequest)
     expect(spy).toHaveBeenCalledWith(makeFakePost())
+  })
+
+  test('should return 500 if AddPost throws', async () => {
+    const { sut, addPostStub, httpRequest } = makeSut()
+    //@ts-ignore
+    vi.spyOn(addPostStub, 'add').mockImplementationOnce(async () => {
+      return await new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
