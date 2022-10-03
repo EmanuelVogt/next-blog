@@ -1,9 +1,10 @@
 import { HttpRequest, Middleware } from '@presentation/protocols'
 import { NextHandler } from "next-connect"
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequestAssign } from '@main/config/next-request-assign';
+import { NextApiResponse } from 'next';
 
 export const nextAdapterMiddleware = (middleware: Middleware) => {
-  return async (req: NextApiRequest, res: NextApiResponse, next: NextHandler) => {
+  return async (req: NextApiRequestAssign, res: NextApiResponse, next: NextHandler) => {
     const httpRequest: HttpRequest = {
       headers: req.headers
     }
