@@ -1,5 +1,5 @@
-import { ServerError } from "@presentation/errors";
-import { badRequest, noContent, serverError } from "@presentation/helpers/http";
+import { ForbidenError, ServerError } from "@presentation/errors";
+import { badRequest, forbidden, noContent, serverError } from "@presentation/helpers/http";
 import {
   AddPost,
   Controller,
@@ -21,8 +21,9 @@ export class AddPostController implements Controller {
         return badRequest(error)
       }
       const data = httpRequest.body
-      await this.addPost.add(data)
-      return noContent()
+      const result = await this.addPost.add(data)
+      if (result) return noContent()
+      return forbidden(new ForbidenError())
     } catch (error) {
       if (error instanceof Error) {
         return serverError(error)

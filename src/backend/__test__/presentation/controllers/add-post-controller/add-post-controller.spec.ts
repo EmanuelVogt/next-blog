@@ -1,8 +1,8 @@
 import { PostModel } from "@domain/models/post";
 import { AddPostController } from "@presentation/controllers/add-post";
 import { AddPost } from "@presentation/controllers/add-post/protocols";
-import { MissingParamError } from "@presentation/errors";
-import { badRequest, serverError } from "@presentation/helpers/http";
+import { ForbidenError, MissingParamError } from "@presentation/errors";
+import { badRequest, forbidden, noContent, serverError } from "@presentation/helpers/http";
 import { HttpRequest, Validation } from "@presentation/protocols";
 import { describe, expect, test, vi } from "vitest";
 
@@ -17,7 +17,7 @@ const makeFakePost = (): PostModel => ({
 
 const makeAddPost = () => {
   class AddPostStub implements AddPost {
-    async add(post: PostModel): Promise<boolean> {
+    async add(post: PostModel): Promise<true | null> {
       return await new Promise(resolve => resolve(true))
     }
   }
@@ -75,6 +75,14 @@ describe('AddPostController', () => {
     expect(spy).toHaveBeenCalledWith(makeFakePost())
   })
 
+  test('should return 403 if AddPost returns null', async () => {
+    const { sut, addPostStub, httpRequest } = makeSut()
+    vi.spyOn(addPostStub, 'add').mockReturnValueOnce(
+      new Promise(resolve => resolve(null!)))
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new ForbidenError()))
+  })
+
   test('should return 500 if AddPost throws', async () => {
     const { sut, addPostStub, httpRequest } = makeSut()
     //@ts-ignore
@@ -83,5 +91,12 @@ describe('AddPostController', () => {
     })
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('should return 203 if AddPost succeeds', async () => {
+    const { sut, addPostStub, httpRequest } = makeSut()
+    vi.spyOn(addPostStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(true)))
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(noContent())
   })
 })
