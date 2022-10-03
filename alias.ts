@@ -27,5 +27,6 @@ export const alias: Record<string, string> = {
   '@presentation/middlewares/protocols': r('./src/backend/presentation/middlewares/protocols'),
   '@data/use-cases/load-account-by-id/protocols': r('./src/backend/data/use-cases/load-account-by-id/protocols'),
   '@data/use-cases/load-account-by-id': r('./src/backend/data/use-cases/load-account-by-id'),
-  '@presentation/controllers/add-post': r('./src/backend/presentation/controllers/add-post')
+  '@presentation/controllers/add-post': r('./src/backend/presentation/controllers/add-post'),
+  '@data/use-cases/add-post': r('./src/backend/data/use-cases/add-post')
 }

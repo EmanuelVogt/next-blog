@@ -14,21 +14,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
-      "@contexts/*": ["contexts/*"],
-      "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-      "@themes/*": ["themes/*"],
-      "@assets/*": ["assets/*"],
-      "@presentation/*": ["backend/presentation/*"],
-      "@domain/*": ["backend/domain/*"],
-      "@data/*": ["backend/data/*"],
-      "@validation/*": ["backend/validation/*"],
-      "@infra/*": ["backend/infra/*"],
-      "@main/*": ["backend/main/*"]
+      "*": ["node_modules/*"],
+      "@/*": ["*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,5 +1,13 @@
-import { PostModel } from "@domain/models/post";
+export interface AddPostModel {
+  title: string
+  description: string
+  content: string
+  user: string
+  published: boolean
+  thumb: string
+  user_id: string
+}
 
 export interface AddPost {
-  add(post: PostModel): Promise<true | null>
+  add(post: AddPostModel): Promise<true | null>
 }

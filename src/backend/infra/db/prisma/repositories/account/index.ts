@@ -3,7 +3,7 @@ import { AddAccountRepository } from "@data/protocols/db/add-account-repository"
 import { LoadAccountByEmailRepository } from "@data/protocols/db/load-account-by-email-repository";
 import { UserModel } from "@domain/models/user";
 import { AddAccountModel } from "@domain/use-cases/add-account";
-import { AccountModel, AuthenticatedAccountModel } from "@domain/models/account";
+import { AccountModel } from "@domain/models/account";
 import { UpdateAccessTokenRepository } from "@data/protocols/db/update-access-token-repository";
 import { LoadAccountByIdRepository } from "@data/protocols/db/load-account-by-id-repository";
 

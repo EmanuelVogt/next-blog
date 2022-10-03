@@ -25,6 +25,7 @@ model Posts {
   id          String @id @default(uuid())
   title       String
   description String
+  published   Boolean @default(true)
   content     String
   thumb       String
   user        Users  @relation(fields: [users_id], references: [id])

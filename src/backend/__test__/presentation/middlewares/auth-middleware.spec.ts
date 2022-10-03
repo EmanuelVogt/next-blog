@@ -2,12 +2,12 @@ import { AccessDenied } from '@presentation/errors'
 import { forbidden, ok } from '@presentation/helpers/http'
 
 import { AuthMiddleware } from '@presentation/middlewares/auth-middleware'
-import { LoadAccountById, HttpRequest, AccountModel } from '@presentation/middlewares/protocols'
+import { LoadAccountByToken, HttpRequest, AccountModel } from '@presentation/middlewares/protocols'
 import {describe, test, expect, vi } from 'vitest'
 
 type SutTypes = {
   sut: AuthMiddleware
-  loadAccountByIdStub: LoadAccountById
+  loadAccountByIdStub: LoadAccountByToken
 }
 
 const makeFakeHttpRequest = (): HttpRequest => {
@@ -25,8 +25,8 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'hashed_password'
 })
 
-const makeLoadAccountById = (): LoadAccountById => {
-  class LoadAccountByIdStub implements LoadAccountById {
+const makeLoadAccountById = (): LoadAccountByToken => {
+  class LoadAccountByIdStub implements LoadAccountByToken {
     async load (id: string): Promise<AccountModel> {
       return await new Promise(resolve => resolve(makeFakeAccount()))
     }
@@ -54,7 +54,7 @@ describe('Auth Middleware', () => {
     expect(loadSpy).toHaveBeenCalledWith('any_token')
   })
 
-  test('should return 403 if LoadAccountByToken returns null', async () => {
+  test('should return 403 if LoadAccountById returns null', async () => {
     const { sut, loadAccountByIdStub } = makeSut()
     vi.spyOn(loadAccountByIdStub, 'load')
       .mockReturnValueOnce(new Promise(resolve => resolve(null)))

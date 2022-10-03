@@ -4,7 +4,6 @@ export interface AccountModel {
   email: string
   password: string
   accessToken?: string
-  role?: string
 }
 
 export interface AuthenticatedAccountModel {

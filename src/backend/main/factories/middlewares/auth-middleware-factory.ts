@@ -1,6 +1,6 @@
 import { AuthMiddleware } from "@presentation/middlewares/auth-middleware"
-import { makeDbLoadAccoubtById } from "../use-cases/db-load-account-by-id-factory"
+import { makeDbLoadAccoubtByToken } from "../use-cases/db-load-account-by-token-factory"
 
 export const makeAuthMiddleware = () => {
-  return new AuthMiddleware(makeDbLoadAccoubtById())
+  return new AuthMiddleware(makeDbLoadAccoubtByToken())
 } 

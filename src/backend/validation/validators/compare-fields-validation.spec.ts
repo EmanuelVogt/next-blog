@@ -1,4 +1,4 @@
-import { InvalidParamError } from '@presentation/errors'
+import { InvalidParamError } from '@/backend/presentation/errors'
 import { CompareFieldsValidation } from './compare-fields-validation'
 import { describe, test, expect } from 'vitest'
 

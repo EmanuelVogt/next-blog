@@ -1,10 +1,10 @@
 import { AccessDenied, ServerError } from '../errors'
 import { forbidden, ok, serverError } from '../helpers/http'
-import { HttpRequest, HttpResponse, LoadAccountById, Middleware } from './protocols'
+import { HttpRequest, HttpResponse, LoadAccountByToken, Middleware } from './protocols'
 
 export class AuthMiddleware implements Middleware {
   constructor(
-    private readonly loadAccountById: LoadAccountById,
+    private readonly loadAccountById: LoadAccountByToken,
   ) { }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
