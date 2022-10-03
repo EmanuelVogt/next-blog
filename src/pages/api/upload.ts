@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { IncomingForm } from 'formidable'
 
-import s3Service from '@backend/services/s3Service';
+import s3Service from '@/backend/services/s3Service';
 
 
 export const config = {

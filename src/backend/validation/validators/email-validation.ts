@@ -1,6 +1,6 @@
-import { InvalidParamError } from '@presentation/errors'
+import { InvalidParamError } from '@/backend/presentation/errors'
 import { EmailValidator } from '../protocols/email-validator'
-import { Validation } from '@presentation/protocols/validation'
+import { Validation } from '@/backend/presentation/protocols/validation'
 
 export class EmailValidation implements Validation {
   constructor (
@@ -8,10 +8,11 @@ export class EmailValidation implements Validation {
     private readonly emailValiodator: EmailValidator
   ) { }
 
-  validate (input: any): Error {
+  validate (input: any): Error | null {
     const isValid = this.emailValiodator.ensureIsValid(input[this.fieldName])
     if (!isValid) {
       return new InvalidParamError(this.fieldName)
     }
+    return null
   }
 }

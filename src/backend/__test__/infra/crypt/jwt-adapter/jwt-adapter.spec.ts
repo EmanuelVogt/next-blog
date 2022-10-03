@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
-import { Decrypter } from '@data/protocols/criptography/decrypter'
-import { Encrypter } from '@data/protocols/criptography/encrypter'
-import { JwtAdapter } from '@infra/crypt/jwt-adapter/jwt-adapter'
+import { Decrypter } from '@/backend/data/protocols/criptography/decrypter'
+import { Encrypter } from '@/backend/data/protocols/criptography/encrypter'
+import { JwtAdapter } from '@/backend/infra/crypt/jwt-adapter/jwt-adapter'
 import { vi, describe, expect, test } from 'vitest'
 
 vi.doMock('jsonwebtoken', () => ({

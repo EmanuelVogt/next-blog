@@ -1,6 +1,6 @@
-import { AddPostRepository } from '@data/protocols/db/add-post-repository'
-import { DbAddPost } from '@data/use-cases/add-post'
-import { AddPostModel } from '@domain/use-cases/add-post'
+import { AddPostRepository } from '@/backend/data/protocols/db/add-post-repository'
+import { DbAddPost } from '@/backend/data/use-cases/add-post'
+import { AddPostModel } from '@/backend/domain/use-cases/add-post'
 import { describe, test, expect, vi } from 'vitest'
 
 const makeFakePost = (): AddPostModel => ({

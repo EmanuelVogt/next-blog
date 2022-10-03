@@ -1,4 +1,4 @@
-import { MissingParamError } from '@presentation/errors'
+import { MissingParamError } from '@/backend/presentation/errors'
 import { RequiredFieldValidation } from './required-fields-validation'
 import { describe, test, expect, vi } from 'vitest'
 

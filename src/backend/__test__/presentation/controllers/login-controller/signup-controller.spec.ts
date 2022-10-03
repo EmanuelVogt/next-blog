@@ -4,10 +4,10 @@ import {
   AuthenticationModel,
   HttpRequest,
   Validation
-} from '@presentation/controllers/login-controller/protocols'
-import { MissingParamError } from '@presentation/errors'
-import { badRequest, unautorized, serverError, ok } from '@presentation/helpers/http'
-import { LoginController } from '@presentation/controllers/login-controller'
+} from '@/backend/presentation/controllers/login-controller/protocols'
+import { MissingParamError } from '@/backend/presentation/errors'
+import { badRequest, unautorized, serverError, ok } from '@/backend/presentation/helpers/http'
+import { LoginController } from '@/backend/presentation/controllers/login-controller'
 import { describe, test, expect, vi } from 'vitest'
 
 const fakeAuthenticatedAccountModel = (): AuthenticatedAccountModel => ({

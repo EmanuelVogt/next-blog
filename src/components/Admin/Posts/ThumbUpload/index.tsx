@@ -20,7 +20,8 @@ export function ThumbUpload({ setImageUrl, imageUrl }: Props): JSX.Element {
     new AbortController()
   );
   const resetFileValue = (e: React.MouseEvent) => {
-    (e.target as HTMLInputElement).value = null;
+    
+    (e.target as HTMLInputElement).value = null!;
   };
 
   const updateUploadProgresss = (event: any) => {

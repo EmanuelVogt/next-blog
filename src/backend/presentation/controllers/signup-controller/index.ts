@@ -1,5 +1,5 @@
-import { ForbidenError, ServerError } from "@presentation/errors";
-import { badRequest, forbidden, ok, serverError } from "@presentation/helpers/http";
+import { ForbidenError, ServerError } from "@/backend/presentation/errors";
+import { badRequest, forbidden, ok, serverError } from "@/backend/presentation/helpers/http";
 import { AddAccount, Authentication, Controller, HttpRequest, HttpResponse, Validation } from "./protocols";
 
 export class SignUpController implements Controller {

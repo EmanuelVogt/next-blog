@@ -1,5 +1,5 @@
-import { AccountModel, Decrypter, LoadAccountByIdRepository } from '@data/use-cases/load-account-by-id/protocols'
-import { DbLoadAccountById } from '@data/use-cases/load-account-by-id'
+import { AccountModel, Decrypter, LoadAccountByIdRepository } from '@/backend/data/use-cases/load-account-by-id/protocols'
+import { DbLoadAccountById } from '@/backend/data/use-cases/load-account-by-id'
 import { test, describe, expect, vi } from 'vitest'
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',

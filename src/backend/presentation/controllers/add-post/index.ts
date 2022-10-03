@@ -1,5 +1,5 @@
-import { ForbidenError, ServerError } from "@presentation/errors";
-import { badRequest, forbidden, noContent, serverError } from "@presentation/helpers/http";
+import { ForbidenError, ServerError } from "@/backend/presentation/errors";
+import { badRequest, forbidden, noContent, serverError } from "@/backend/presentation/helpers/http";
 import {
   AddPost,
   AddPostModel,

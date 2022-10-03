@@ -1,5 +1,5 @@
-import { AccountModel, Decrypter, LoadAccountByTokenRepository } from '@data/use-cases/load-account-by-token/protocols'
-import { DbLoadAccountByToken } from '@data/use-cases/load-account-by-token'
+import { AccountModel, Decrypter, LoadAccountByTokenRepository } from '@/backend/data/use-cases/load-account-by-token/protocols'
+import { DbLoadAccountByToken } from '@/backend/data/use-cases/load-account-by-token'
 import { test, describe, expect, vi } from 'vitest'
 
 const makeFakeAccount = (): AccountModel => ({

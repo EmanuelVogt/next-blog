@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { AuthContext } from "@contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 import { Box, TextField, Button } from "@mui/material";
 
 import { useContext, useEffect, useState } from "react";

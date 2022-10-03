@@ -5,8 +5,8 @@ import {
   Encrypter,
   UpdateAccessTokenRepository,
   AccountModel
-} from '@data/use-cases/authentication/protocols'
-import { DbAuthentication } from '@data/use-cases/authentication'
+} from '@/backend/data/use-cases/authentication/protocols'
+import { DbAuthentication } from '@/backend/data/use-cases/authentication'
 import { describe, test, expect, vi } from 'vitest'
 const faceAccount: AccountModel = ({
   id: 'any_id',

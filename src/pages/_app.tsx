@@ -2,8 +2,8 @@
 import { ReactElement, ReactNode } from "react";
 import type { AppProps } from "next/app";
 import { CssBaseline } from "@mui/material";
-import { AppThemeProvider } from "@contexts/ThemeContext";
-import { AuthProvider } from "@contexts/AuthContext";
+import { AppThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import hljs from "highlight.js";
 import "react-quill/dist/quill.snow.css";
 

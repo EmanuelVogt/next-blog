@@ -1,12 +1,12 @@
-import { Validation } from '@presentation/protocols/validation'
-import { EmailValidator } from '@validation/protocols/email-validator'
-import { makeSignUpControllerFactory } from '@main/factories/controllers/signup-controller-factory'
+import { Validation } from '@/backend/presentation/protocols/validation'
+import { EmailValidator } from '@/backend/validation/protocols/email-validator'
+import { makeSignUpControllerFactory } from '@/backend/main/factories/controllers/signup-controller-factory'
 import {
   CompareFieldsValidation,
   EmailValidation,
   RequiredFieldValidation,
   ValidationComposite
-} from '@validation/validators'
+} from '@/backend/validation/validators'
 import { describe, test, expect, vi } from 'vitest'
 
 vi.mock('../../../validation/validators/validation-composite.ts')

@@ -1,6 +1,6 @@
-import { DbAddAccount } from '@data/use-cases/add-account'
-import { BcryptAdapter } from '@infra/crypt/bcrypt-adapter/bcrypt-adapter'
-import { AccountPrismaRepository } from '@infra/db/prisma/repositories/account'
+import { DbAddAccount } from '@/backend/data/use-cases/add-account'
+import { BcryptAdapter } from '@/backend/infra/crypt/bcrypt-adapter/bcrypt-adapter'
+import { AccountPrismaRepository } from '@/backend/infra/db/prisma/repositories/account'
 
 export const makeDbAddAccount = (): DbAddAccount => {
   const salt = 12

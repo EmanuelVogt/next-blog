@@ -1,7 +1,7 @@
-import { DbLoadAccountByToken } from "@data/use-cases/load-account-by-token"
-import { JwtAdapter } from "@infra/crypt/jwt-adapter/jwt-adapter"
-import { AccountPrismaRepository } from "@infra/db/prisma/repositories/account"
-import { jwtSecret } from '@main/config/env'
+import { DbLoadAccountByToken } from "@/backend/data/use-cases/load-account-by-token"
+import { JwtAdapter } from "@/backend/infra/crypt/jwt-adapter/jwt-adapter"
+import { AccountPrismaRepository } from "@/backend/infra/db/prisma/repositories/account"
+import { jwtSecret } from '@/backend/main/config/env'
 
 export const makeDbLoadAccoubtByToken = () => {
   const decrypt = new JwtAdapter(jwtSecret)
