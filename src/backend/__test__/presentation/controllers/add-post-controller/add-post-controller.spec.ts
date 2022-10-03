@@ -1,6 +1,8 @@
 import { PostModel } from "@domain/models/post";
 import { AddPostController } from "@presentation/controllers/add-post";
 import { AddPost } from "@presentation/controllers/add-post/protocols";
+import { MissingParamError } from "@presentation/errors";
+import { badRequest } from "@presentation/helpers/http";
 import { HttpRequest, Validation } from "@presentation/protocols";
 import { describe, expect, test, vi } from "vitest";
 
@@ -54,8 +56,22 @@ const makeSut = (): SutTypes => {
 describe('AddPostController', () => {
   test('should call Validation with correct values', async () => {
     const { sut, validationStub, httpRequest } = makeSut()
-    const authSpy = vi.spyOn(validationStub, 'validate')
+    const spy = vi.spyOn(validationStub, 'validate')
     await sut.handle(httpRequest)
-    expect(authSpy).toHaveBeenCalledWith(makeFakePost())
+    expect(spy).toHaveBeenCalledWith(makeFakePost())
+  })
+
+  test('should return 400 if valididation return an error', async () => {
+    const { sut, validationStub, httpRequest } = makeSut()
+    vi.spyOn(validationStub, 'validate').mockReturnValue(new MissingParamError('any_field'))
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('should call AddPost with correct values', async () => {
+    const { sut, addPostStub, httpRequest } = makeSut()
+    const spy = vi.spyOn(addPostStub, 'add')
+    await sut.handle(httpRequest)
+    expect(spy).toHaveBeenCalledWith(makeFakePost())
   })
 })
