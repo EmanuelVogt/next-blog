@@ -68,7 +68,6 @@ export function AuthProvider({ children }: Props) {
         return;
       } catch (error) {
         if (error instanceof AxiosError) {
-          console.log(error.response?.data);
         }
       }
     }

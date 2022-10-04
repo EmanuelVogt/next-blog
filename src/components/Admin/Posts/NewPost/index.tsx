@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import { AuthContext } from "@/contexts/AuthContext";
+import { api } from "@/services/api";
 import { Box, TextField, Button } from "@mui/material";
 
 import { useContext, useEffect, useState } from "react";
@@ -13,11 +14,19 @@ export const NewPost = (): JSX.Element => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    console.log(user)
-  }, [])
+  const handleAddPost = async () => {
+    const data = {
+      title,
+      description,
+      content: value,
+      published: true,
+      thumb: imageUrl,
+      user: user?.id,
+    };
+    await api.post("/api/post", data);
+  };
 
-  console.log(value)
+  console.log(user)
   return (
     <Box
       sx={{
@@ -32,7 +41,7 @@ export const NewPost = (): JSX.Element => {
         }}
       >
         <Box />
-        <Button variant="contained" sx={{ marginTop: 2 }}>
+        <Button variant="contained" sx={{ marginTop: 2 }} onClick={handleAddPost}>
           Publicar Post
         </Button>
       </Box>
@@ -57,6 +66,5 @@ export const NewPost = (): JSX.Element => {
       />
       <Editor setValue={setValue} />
     </Box>
-    
   );
 };
