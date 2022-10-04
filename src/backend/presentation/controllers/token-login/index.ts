@@ -3,7 +3,7 @@ import { badRequest, ok, serverError, unautorized } from "../../helpers/http";
 import { HttpRequest, HttpResponse } from "../../protocols";
 import { Controller, TokenAuthentication } from "./protocols";
 
-export class TokenLogin implements Controller {
+export class TokenLoginController implements Controller {
   constructor(private readonly tokenAuthentication: TokenAuthentication ) { }
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
