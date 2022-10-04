@@ -63,7 +63,7 @@ export function AuthProvider({ children }: Props) {
     const { "@next-token": token } = parseCookies();
     if (token) {
       try {
-        const { data } = await api.post("/token-login", { token });
+        const { data } = await api.post("/api/account/token-login", { token });
         setUser(data.account);
         return;
       } catch (error) {
@@ -79,7 +79,6 @@ export function AuthProvider({ children }: Props) {
     });
     setUser(undefined);
     const { "@next-token": token } = parseCookies();
-    console.log(token)
     push("/");
   }, []);
 

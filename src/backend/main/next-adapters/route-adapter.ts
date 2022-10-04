@@ -5,7 +5,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export const adapterRoute = (controller: Controller) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const httpRequest: HttpRequest = {
-      body: req.body
+      body: req.body,
+      headers: req.headers
     }
     const httpResponse = await controller.handle(httpRequest)
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
