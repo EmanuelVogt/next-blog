@@ -16,6 +16,8 @@ export const NewPost = (): JSX.Element => {
   useEffect(() => {
     console.log(user)
   }, [])
+
+  console.log(value)
   return (
     <Box
       sx={{
@@ -55,5 +57,6 @@ export const NewPost = (): JSX.Element => {
       />
       <Editor setValue={setValue} />
     </Box>
+    
   );
 };

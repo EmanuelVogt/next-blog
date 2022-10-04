@@ -1,6 +1,6 @@
-import { EmailValidatorAdapter } from '@infra/validators/email-validator.adapter'
+import { EmailValidatorAdapter } from '@/backend/infra/validators/email-validator.adapter'
+import { EmailValidator } from '@/backend/validation/protocols/email-validator'
 import validator from 'validator'
-import { EmailValidator } from '@validation/protocols/email-validator'
 import { test, describe, expect, vi } from 'vitest'
 
 vi.doMock('validator', () => ({

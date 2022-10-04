@@ -1,4 +1,4 @@
-import { AccountModel, Decrypter, LoadAccountByIdRepository } from '@/backend/data/use-cases/load-account-by-id/protocols'
+import { AccountModel, LoadAccountByIdRepository } from '@/backend/data/use-cases/load-account-by-id/protocols'
 import { DbLoadAccountById } from '@/backend/data/use-cases/load-account-by-id'
 import { test, describe, expect, vi } from 'vitest'
 const makeFakeAccount = (): AccountModel => ({
@@ -17,44 +17,18 @@ const makeLoadAccountByIdRepository = (): LoadAccountByIdRepository => {
   return new LoadAccountByIdRepositoryStub()
 }
 
-const makeDecrypter = (): Decrypter => {
-  class DecrypterStub implements Decrypter {
-    async decrypt (value: string): Promise<string> {
-      return await new Promise(resolve => resolve('any_value_decrypted'))
-    }
-  }
-  return new DecrypterStub()
-}
-
 type SutTypes = {
   sut: DbLoadAccountById
-  decrypterStub: Decrypter
   loadAccountByIdRepositoryStub: LoadAccountByIdRepository
 }
 
 const makeSut = (): SutTypes => {
   const loadAccountByIdRepositoryStub = makeLoadAccountByIdRepository()
-  const decrypterStub = makeDecrypter()
-  const sut = new DbLoadAccountById(decrypterStub, loadAccountByIdRepositoryStub)
-  return { sut, decrypterStub, loadAccountByIdRepositoryStub }
+  const sut = new DbLoadAccountById( loadAccountByIdRepositoryStub)
+  return { sut, loadAccountByIdRepositoryStub }
 }
 
 describe('DbLoadAccountById UseCase', () => {
-  test('should call Decrypter with correct values', async () => {
-    const { sut, decrypterStub } = makeSut()
-    const spy = vi.spyOn(decrypterStub, 'decrypt')
-    await sut.load('any_token')
-    expect(spy).toHaveBeenCalledWith('any_token')
-  })
-
-  test('should returns null if Decrypter return null', async () => {
-    const { sut, decrypterStub } = makeSut()
-    vi.spyOn(decrypterStub, 'decrypt')
-      .mockReturnValueOnce(new Promise(resolve => resolve(null)))
-    const account = await sut.load('any_token')
-    expect(account).toBeNull()
-  })
-
   test('should call LoadAccountByIdRepository with correct values', async () => {
     const { sut, loadAccountByIdRepositoryStub } = makeSut()
     const spy = vi.spyOn(loadAccountByIdRepositoryStub, 'loadById')
@@ -76,15 +50,6 @@ describe('DbLoadAccountById UseCase', () => {
       .mockReturnValueOnce(new Promise(resolve => resolve(makeFakeAccount())))
     const account = await sut.load('any_token')
     expect(account).toEqual(makeFakeAccount())
-  })
-
-  test('shoult throw if Decrypter throws', async () => {
-    const { sut, decrypterStub } = makeSut()
-    vi.spyOn(decrypterStub, 'decrypt')
-      .mockReturnValueOnce(
-        new Promise(resolve => resolve(new Promise((resolve, reject) => reject(new Error())))))
-    const promise = sut.load('any_token')
-    void expect(promise).rejects.toThrow()
   })
 
   test('shoult throw if LoadAccountByTokenRepository throws', async () => {

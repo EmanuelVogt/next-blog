@@ -100,7 +100,7 @@ export function Editor({ setValue }: Props): JSX.Element {
       modules={modules}
       formats={formats}
       theme="snow"
-      style={{ height: "1000px", marginTop: "20px" }}
+      style={{ height: "400px", marginTop: "20px" }}
       multiline
       onChange={setValue}
       forwardedRef={editorRef}

@@ -1,6 +1,6 @@
 import { AccountModel } from "@/backend/domain/models/account";
 import { AddPostController } from "@/backend/presentation/controllers/add-post";
-import { AddPost, AddPostModel, LoadAccountByToken } from "@/backend/presentation/controllers/add-post/protocols";
+import { AddPost, AddPostModel } from "@/backend/presentation/controllers/add-post/protocols";
 import { ForbidenError, MissingParamError } from "@/backend/presentation/errors";
 import { badRequest, forbidden, noContent, serverError } from "@/backend/presentation/helpers/http";
 import { HttpRequest, Validation } from "@/backend/presentation/protocols";
@@ -13,13 +13,7 @@ const makeFakePost = (): AddPostModel => ({
   title: 'user_title',
   user_id: 'any_user_id',
   content: 'any_content',
-  user: {
-    email: 'any_email',
-    id: 'any_id',
-    name: 'any_id',
-    password: 'any_password',
-    accessToken: 'any_accessToken'
-  }
+  user: 'any_id'
 })
 
 const makeFakeAccount = (): AccountModel => ({
@@ -30,24 +24,6 @@ const makeFakeAccount = (): AccountModel => ({
   accessToken: 'any_accessToken'
 })
 
-
-const makeLoadAccountById = (): LoadAccountByToken => {
-  class LoadAccountByIdStub implements LoadAccountByToken {
-    async load(id: string): Promise<AccountModel> {
-      return await new Promise(resolve => resolve(
-        {
-          email: 'any_email',
-          id: 'any_id',
-          name: 'any_id',
-          password: 'any_password',
-          accessToken: 'any_accessToken'
-        }
-      ))
-    }
-  }
-
-  return new LoadAccountByIdStub()
-}
 
 const makeAddPost = () => {
   class AddPostStub implements AddPost {
@@ -70,7 +46,6 @@ const makeValidation = () => {
 type SutTypes = {
   sut: AddPostController
   validationStub: Validation
-  loadAccountByIdStub: LoadAccountByToken
   addPostStub: AddPost
   httpRequest: HttpRequest
 }
@@ -79,14 +54,12 @@ const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
   const addPostStub = makeAddPost()
   const httpRequest = { body: makeFakePost() }
-  const loadAccountByIdStub = makeLoadAccountById()
-  const sut = new AddPostController(validationStub, addPostStub, loadAccountByIdStub)
+  const sut = new AddPostController(validationStub, addPostStub)
   return {
     sut,
     addPostStub,
     httpRequest,
     validationStub,
-    loadAccountByIdStub,
   }
 }
 
@@ -135,30 +108,5 @@ describe('AddPostController', () => {
     vi.spyOn(addPostStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(true)))
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(noContent())
-  })
-
-  test('should call LoadAccountById with correct value', async () => {
-    const { sut, loadAccountByIdStub, httpRequest } = makeSut()
-    const loadSpy = vi.spyOn(loadAccountByIdStub, 'load')
-    await sut.handle(httpRequest)
-    expect(loadSpy).toHaveBeenCalledWith('any_user_id')
-  })
-
-  test('should return 400 if LoadAccountById returns null', async () => {
-    const { sut, loadAccountByIdStub, httpRequest } = makeSut()
-    vi.spyOn(loadAccountByIdStub, 'load')
-      .mockReturnValueOnce(new Promise(resolve => resolve(null)))
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('user_id')))
-  })
-
-  test('should return 500 if LoadAccountById throws', async () => {
-    const { sut, loadAccountByIdStub, httpRequest } = makeSut()
-    //@ts-ignore
-    vi.spyOn(loadAccountByIdStub, 'load').mockImplementationOnce(async () => {
-      return await new Promise((resolve, reject) => reject(new Error()))
-    })
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
