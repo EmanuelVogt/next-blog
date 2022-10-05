@@ -5,7 +5,6 @@ export interface AddPostModel {
   user: string
   published: boolean
   thumb: string
-  user_id: string
 }
 
 export interface AddPost {

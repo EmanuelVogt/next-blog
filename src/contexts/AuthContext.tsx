@@ -27,7 +27,7 @@ type AuthContextData = {
   login(data: LoginData): Promise<void>;
   logout(): void;
   isAuth: boolean;
-  user: User | undefined;
+  user: User;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -37,7 +37,7 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState({} as User);
   const isAuth = !!user;
   const { push } = useRouter();
 
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: Props) {
     if (token) {
       try {
         const { data } = await api.post("/api/account/token-login", { token });
-        setUser(data.account);
+        setUser(data);
         return;
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: Props) {
     destroyCookie(undefined, "@next-token", {
       path: '/'
     });
-    setUser(undefined);
+    setUser(null!);
     const { "@next-token": token } = parseCookies();
     push("/");
   }, []);

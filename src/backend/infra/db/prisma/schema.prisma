@@ -22,13 +22,13 @@ model Users {
 }
 
 model Posts {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   title       String
   description String
   published   Boolean @default(true)
-  content     String
+  content     String  @db.LongText
   thumb       String
-  user        Users  @relation(fields: [users_id], references: [id])
+  user        Users   @relation(fields: [users_id], references: [id])
   users_id    String
 
   @@map("posts")

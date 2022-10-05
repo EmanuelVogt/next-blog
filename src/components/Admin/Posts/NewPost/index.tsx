@@ -18,7 +18,7 @@ export const NewPost = (): JSX.Element => {
     const data = {
       title,
       description,
-      content: value,
+      content: Buffer.from(value).toString('base64'),
       published: true,
       thumb: imageUrl,
       user: user?.id,
@@ -26,7 +26,6 @@ export const NewPost = (): JSX.Element => {
     await api.post("/api/post", data);
   };
 
-  console.log(user)
   return (
     <Box
       sx={{
@@ -41,7 +40,11 @@ export const NewPost = (): JSX.Element => {
         }}
       >
         <Box />
-        <Button variant="contained" sx={{ marginTop: 2 }} onClick={handleAddPost}>
+        <Button
+          variant="contained"
+          sx={{ marginTop: 2 }}
+          onClick={handleAddPost}
+        >
           Publicar Post
         </Button>
       </Box>
