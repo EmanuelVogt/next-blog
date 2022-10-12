@@ -4,5 +4,4 @@ export interface PostModel {
   description: string
   published: boolean
   thumb: string
-  user_id: string
 }
