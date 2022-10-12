@@ -8,15 +8,9 @@ const makeFakePost = (): AddPostModel => ({
   published: true,
   thumb: 'any_thumb',
   title: 'any_title',
-  user_id: 'any_user_id',
+  user: 'any_user_id',
   content: 'any_content',
-  user: {
-    accessToken: 'any_access_token',
-    email: 'any_email',
-    id: 'any_id',
-    name: 'any_name',
-    password: 'any_password'
-  }
+
 })
 
 const makeAddPost = (): AddPostRepository => {
