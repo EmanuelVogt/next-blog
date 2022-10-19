@@ -44,7 +44,7 @@ describe('DbGetPosts use-case', () => {
     vi.spyOn( getPostsRepositoryStub, 'find')
       .mockReturnValueOnce(new Promise(resolve => resolve([])))
     const sutResponse = await sut.getAll()
-    expect(sutResponse).toBe([])
+    expect(sutResponse).toEqual([])
   })
 
   test('should throw if GetPostsRepository throws', () => {
@@ -56,11 +56,5 @@ describe('DbGetPosts use-case', () => {
       )
     const promise = sut.getAll()
     void expect(promise).rejects.toThrow()
-  })
-
-  test('should return true if GetPostsRepository not returns true', async () => {
-    const { sut } = makeSut()
-    const sutResponse = await sut.getAll()
-    expect(sutResponse).toBe(true)
   })
 })

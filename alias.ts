@@ -34,5 +34,9 @@ export const alias: Record<string, string> = {
   '@/backend/data/use-cases/token-authentication': r('./src/backend/data/use-cases/token-authentication'),
   '@/backend/presentation/controllers/get-posts': r('./src/backend/presentation/controllers/get-posts'),
   '@/backend/presentation/protocols': r('./src/backend/presentation/protocols'),
-  '@/backend/domain/use-cases/get-posts': r('./src/backend/domain/use-cases/get-posts')
+  '@/backend/domain/use-cases/get-posts': r('./src/backend/domain/use-cases/get-posts'),
+  '@/backend/data/use-cases/get-posts': r('./src/backend/data/use-cases/get-posts'),
+  '@/backend/data/use-cases/get-post': r('./src/backend/data/use-cases/get-post'),
+  '@/backend/presentation/controllers/get-post': r('./src/backend/presentation/controllers/get-post'),
+  '@/backend/domain/use-cases/get-post': r('./src/backend/domain/use-cases/get-post')
 }

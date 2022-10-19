@@ -1,11 +1,12 @@
 import { Controller, GetPost, HttpRequest, HttpResponse, noContent, ok, serverError } from "./protocols";
 
 export class GetPostController implements Controller {
-  constructor(private readonly getPost: GetPost) {}
-  async handle(_httpRequest: HttpRequest): Promise<HttpResponse> {
+  constructor(private readonly getPost: GetPost) { }
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const post = await this.getPost.getOne()
-      if(!!post){
+      const { id } = httpRequest.headers
+      const post = await this.getPost.getOne(id)
+      if (!!post) {
         return ok(post)
       }
       return noContent()

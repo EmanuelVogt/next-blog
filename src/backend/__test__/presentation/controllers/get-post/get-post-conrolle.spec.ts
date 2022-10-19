@@ -7,15 +7,15 @@ import { describe, test, expect, vi } from 'vitest'
 
 const makeGetPostsStub = (): GetPost => {
   class GetPostStub implements GetPost {
-    async getOne(): Promise<PostModel> {
+    async getOne(id: string): Promise<PostModel> {
       return new Promise(resolve => resolve(
-          {
-            description: 'any_post',
-            id: 'any_id',
-            published: true,
-            thumb: 'any_thumb',
-            title: 'any_title',
-          }
+        {
+          description: 'any_post',
+          id: 'any_id',
+          published: true,
+          thumb: 'any_thumb',
+          title: 'any_title',
+        }
       ))
     }
   }
@@ -29,7 +29,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const httpRequest: HttpRequest = {}
+  const httpRequest: HttpRequest = { headers: { id: 'any_id' } }
   const getPostStub = makeGetPostsStub()
   const sut = new GetPostController(getPostStub)
   return {
@@ -39,18 +39,18 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('GetPosts Controller', () => {
-  test('should call GetPosts', async () => {
+describe('GetPost Controller', () => {
+  test('should call GetPost', async () => {
     const { getPostStub, sut, httpRequest } = makeSut()
     const spy = vi.spyOn(getPostStub, 'getOne')
     await sut.handle(httpRequest)
-    expect(spy).toHaveBeenCalled()
+    expect(spy).toHaveBeenCalledWith('any_id')
   })
 
   test('should return 500 if GetPosts throws', async () => {
     const { sut, getPostStub, httpRequest } = makeSut()
     vi.spyOn(getPostStub, 'getOne').mockImplementationOnce(async () => {
-      return await new Promise((resolve, reject) => reject(new Error()))
+      return await new Promise((resolve, reject) => reject(new Error())) as Error
     })
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
