@@ -5,14 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { useRouter } from "next/router";
-
-type Post = {
-  id: number;
-  title: string;
-  thumb: string;
-  description: string;
-  date: string;
-};
+import { Post } from "..";
 
 type Props = {
   post: Post;
@@ -20,7 +13,7 @@ type Props = {
 
 export default function CardPost({ post }: Props) {
   const { push } = useRouter();
-  const handleNavigate = (id: number) => {
+  const handleNavigate = (id: string) => {
     push(`/post/${id}`);
   };
   return (
