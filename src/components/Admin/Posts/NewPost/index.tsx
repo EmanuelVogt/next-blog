@@ -21,9 +21,9 @@ export const NewPost = (): JSX.Element => {
       content: Buffer.from(value).toString('base64'),
       published: true,
       thumb: imageUrl,
-      user: user?.id,
+      user: user.id,
     };
-    await api.post("/api/post", data);
+    await api.post("/api/admin/post", data);
   };
 
   return (

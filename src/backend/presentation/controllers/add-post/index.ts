@@ -25,7 +25,6 @@ export class AddPostController implements Controller {
       return forbidden(new ForbidenError())
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error)
         return serverError(error)
       }
       return serverError(new ServerError('An error occoured in server side, contact the server suport'))

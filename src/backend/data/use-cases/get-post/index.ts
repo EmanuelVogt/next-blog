@@ -7,6 +7,6 @@ export class DbGetPost implements GetPost {
 
   async getOne(id: string): Promise<PostModel> {
     const post = await this.getPostRepository.findById(id)
-    return !!post ? post : null!
+    return post || null
   }
 } 

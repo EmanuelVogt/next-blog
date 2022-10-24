@@ -29,7 +29,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const httpRequest: HttpRequest = { headers: { id: 'any_id' } }
+  const httpRequest: HttpRequest = { query: { id: 'any_id' } }
   const getPostStub = makeGetPostsStub()
   const sut = new GetPostController(getPostStub)
   return {
